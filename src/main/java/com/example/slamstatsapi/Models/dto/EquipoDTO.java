@@ -27,5 +27,5 @@ public class EquipoDTO
 
     private int titulos;
 
-    private List<NumeroRetirado> numeroRetirados;
+    private List<NumeroRetiradoDTO> numeroRetirados;
 }

@@ -32,6 +32,11 @@ public class EquipoController
                         equipo.getFechaFundacion(),
                         equipo.getTitulos(),
                         equipo.getNumeroRetirados()
+                                .stream().map(numeroRetirado -> new NumeroRetiradoDTO(
+                                        numeroRetirado.getId(),
+                                        numeroRetirado.getNumero(),
+                                        numeroRetirado.getJugador()
+                                )).toList()
                 )).toList();
     }
 
@@ -47,6 +52,11 @@ public class EquipoController
                         equipo.getFechaFundacion(),
                         equipo.getTitulos(),
                         equipo.getNumeroRetirados()
+                                .stream().map(numeroRetirado -> new NumeroRetiradoDTO(
+                                        numeroRetirado.getId(),
+                                        numeroRetirado.getNumero(),
+                                        numeroRetirado.getJugador()
+                                )).toList()
                 ));
     }
 
@@ -63,6 +73,11 @@ public class EquipoController
                         equipo.getFechaFundacion(),
                         equipo.getTitulos(),
                         equipo.getNumeroRetirados()
+                                .stream().map(numeroRetirado -> new NumeroRetiradoDTO(
+                                        numeroRetirado.getId(),
+                                        numeroRetirado.getNumero(),
+                                        numeroRetirado.getJugador()
+                                )).toList()
                 )).toList();
     }
 
@@ -74,7 +89,7 @@ public class EquipoController
                 .map(numeroRetirado -> new NumeroRetiradoDTO(
                         numeroRetirado.getId(),
                         numeroRetirado.getNumero(),
-                        numeroRetirado.getNumero()
+                        numeroRetirado.getJugador()
                 )).toList();
     }
 }

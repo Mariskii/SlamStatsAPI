@@ -71,7 +71,7 @@ public class JugadorController
             @RequestParam String nombre,
             @RequestParam(defaultValue = "0") int page
     ){
-        Pageable pageable = PageRequest.of(page,10);
+        Pageable pageable = PageRequest.of(page,25);
         return jsi.getJugadorByNombreCompleto(nombre,pageable)
                 .stream()
                 .map(jugador -> new JugadorDTO(
