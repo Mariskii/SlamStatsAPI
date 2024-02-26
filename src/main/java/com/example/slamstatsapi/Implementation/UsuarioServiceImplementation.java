@@ -1,5 +1,6 @@
 package com.example.slamstatsapi.Implementation;
 
+import com.example.slamstatsapi.Exceptions.IdNotFoundException;
 import com.example.slamstatsapi.Exceptions.PasswordMismatchException;
 import com.example.slamstatsapi.Exceptions.UserExistsException;
 import com.example.slamstatsapi.Exceptions.UserNotFoundException;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,48 +44,58 @@ public class UsuarioServiceImplementation implements UsuarioService
     }
 
     @Override
-    public void addFavoritePlayer(Long idPlayer, Long idUser)
+    public void addFavoritePlayer(Long idPlayer, Long idUser) throws UserNotFoundException, IdNotFoundException
     {
-        Jugador j = jr.findById(idPlayer).get();
-        Usuario u = ur.findById(idUser).get();
+        Jugador j = jr.findById(idPlayer)
+                .orElseThrow(() -> new IdNotFoundException("There is no player with that id."));
 
-        if(j != null)
-        {
-            List<Jugador> jugadors = u.getJugadoresFavoritos();
-            jugadors.add(j);
+        Usuario u = ur.findById(idUser)
+                .orElseThrow(() -> new UserNotFoundException("The user provided does not exist."));
 
-            u.setJugadoresFavoritos(jugadors);
-            ur.save(u);
-        }
+        u.getJugadoresFavoritos().add(j);
+        ur.save(u);
     }
 
 
     @Override
-    public void deleteFavoritePlayer(Long idPlayer, Long idUser)
+    public void deleteFavoritePlayer(Long idPlayer, Long idUser) throws UserNotFoundException, IdNotFoundException
     {
-        Jugador j = jr.findById(idPlayer).get();
-        Usuario u = ur.findById(idUser).get();
+        Jugador j = jr.findById(idPlayer)
+                .orElseThrow(() -> new IdNotFoundException(""));
 
-        if(j != null)
-        {
-            List<Jugador> jugadors = u.getJugadoresFavoritos();
-            jugadors.remove(j);
+        Usuario u = ur.findById(idUser)
+                .orElseThrow(() -> new UserNotFoundException("The user provided does not exist."));
 
-            u.setJugadoresFavoritos(jugadors);
-            ur.save(u);
-        }
+        List<Jugador> jugadors = u.getJugadoresFavoritos();
+        jugadors.remove(j);
+
+        u.setJugadoresFavoritos(jugadors);
+        ur.save(u);
     }
 
     @Override
-    public List<Jugador> getFavoriteJugadores(Long id)
+    public List<Jugador> getFavoriteJugadores(Long id) throws UserNotFoundException
     {
-        Usuario user = ur.findById(id).get();
+        Usuario user = ur.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("The user provided does not exist."));
 
         return  user.getJugadoresFavoritos();
     }
 
     @Override
-    public Usuario login(String userName, String passwd) throws UserNotFoundException, PasswordMismatchException
+    public boolean isPlayerFavorito(Long idPlayer, Long idUser) throws IdNotFoundException, UserNotFoundException
+    {
+        Usuario u = ur.findById(idUser)
+                .orElseThrow(() -> new UserNotFoundException("The user provided does not exist."));
+
+        List<Jugador> jugadoresFavoritos = u.getJugadoresFavoritos();
+
+        return jugadoresFavoritos.stream().anyMatch(jugador -> jugador.getId().equals(idPlayer));
+    }
+
+
+    @Override
+    public Optional<Usuario> login(String userName, String passwd) throws UserNotFoundException, PasswordMismatchException
     {
 
         Optional<Usuario> user = ur.findUsuarioByNombreUsuario(userName);
@@ -100,7 +110,7 @@ public class UsuarioServiceImplementation implements UsuarioService
             throw new PasswordMismatchException("Incorrect password for the user");
         }
 
-        return user.get();
+        return user;
     }
 
 

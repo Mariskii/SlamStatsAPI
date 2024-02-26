@@ -37,6 +37,5 @@ public class Premios
 
     @OneToOne
     @JoinColumn(name = "jugadorid")
-    @JsonIgnore
     private Jugador jugador;
 }

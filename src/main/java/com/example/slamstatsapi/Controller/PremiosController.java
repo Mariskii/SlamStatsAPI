@@ -2,7 +2,7 @@ package com.example.slamstatsapi.Controller;
 
 import com.example.slamstatsapi.Exceptions.IdNotFoundException;
 import com.example.slamstatsapi.Implementation.PremiosServiceImplementation;
-import com.example.slamstatsapi.Models.Premios;
+import com.example.slamstatsapi.Models.dto.PremiosDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,17 +20,48 @@ public class PremiosController
     PremiosServiceImplementation psi;
 
     @GetMapping("trophies")
-    public List<Premios> getAllPremios(){return psi.getAllPremios();}
+    public List<PremiosDTO> getAllPremios()
+    {
+        return psi.getAllPremios()
+                .stream()
+                .map(premios -> new PremiosDTO(
+                        premios.getId(),
+                        premios.getAnillos(),
+                        premios.getFmvp(),
+                        premios.getMvp(),
+                        premios.getAllstar(),
+                        premios.getDpoy(),
+                        premios.getRoy()
+                )).toList();
+    }
 
     @GetMapping("trophies/{id}")
-    public Premios getPremiosById(@PathVariable Long id) throws IdNotFoundException
+    public Optional<PremiosDTO> getPremiosById(@PathVariable Long id) throws IdNotFoundException
     {
-        return psi.getPremiosById(id);
+        return psi.getPremiosById(id)
+                .map(premios -> new PremiosDTO(
+                        premios.getId(),
+                        premios.getAnillos(),
+                        premios.getFmvp(),
+                        premios.getMvp(),
+                        premios.getAllstar(),
+                        premios.getDpoy(),
+                        premios.getRoy()
+                ));
     }
 
     @GetMapping("trophies/players/{id}")
-    public Premios getPremiosByPlayerId(@PathVariable Long id) throws IdNotFoundException
+    public Optional<PremiosDTO> getPremiosByPlayerId(@PathVariable Long id) throws IdNotFoundException
     {
-        return psi.getPremiosByPlayerId(id);
+        return psi.getPremiosByPlayerId(id)
+                .map(premios -> new PremiosDTO(
+                        premios.getId(),
+                        premios.getAnillos(),
+                        premios.getFmvp(),
+                        premios.getMvp(),
+                        premios.getAllstar(),
+                        premios.getDpoy(),
+                        premios.getRoy()
+                ));
     }
 }

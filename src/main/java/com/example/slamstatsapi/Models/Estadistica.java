@@ -52,6 +52,5 @@ public class Estadistica
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "jugadorid")
-    @JsonIgnore
     private Jugador jugador;
 }

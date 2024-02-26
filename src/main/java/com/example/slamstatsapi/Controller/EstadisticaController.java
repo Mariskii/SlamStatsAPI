@@ -3,6 +3,7 @@ package com.example.slamstatsapi.Controller;
 import com.example.slamstatsapi.Exceptions.IdNotFoundException;
 import com.example.slamstatsapi.Implementation.EstadisticaServiceImplementation;
 import com.example.slamstatsapi.Models.Estadistica;
+import com.example.slamstatsapi.Models.dto.EstadisticaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,17 +21,64 @@ public class EstadisticaController
     EstadisticaServiceImplementation esi;
 
     @GetMapping("stats/player/{id}")
-    public List<Estadistica> getEstadisticasByPlayerId(@PathVariable Long id) throws IdNotFoundException
+    public List<EstadisticaDTO> getEstadisticasByPlayerId(@PathVariable Long id) throws IdNotFoundException
     {
-        return esi.getEstadisticasByJugadorId(id);
+        return esi.getEstadisticasByJugadorId(id)
+                .stream()
+                .map(estadistica -> new EstadisticaDTO(
+                        estadistica.getId(),
+                        estadistica.getSeason(),
+                        estadistica.getPj(),
+                        estadistica.getPpp(),
+                        estadistica.getTc(),
+                        estadistica.getTl(),
+                        estadistica.getRpp(),
+                        estadistica.getApp(),
+                        estadistica.getStl(),
+                        estadistica.getBlk(),
+                        estadistica.getPm3(),
+                        estadistica.getPerc3()
+                )).toList();
     }
 
     @GetMapping("stats/{id}")
-    public Optional<Estadistica> getEstadisticaById(@PathVariable Long id) throws IdNotFoundException
+    public Optional<EstadisticaDTO> getEstadisticaById(@PathVariable Long id) throws IdNotFoundException
     {
-        return esi.getEstadisticaById(id);
+        return esi.getEstadisticaById(id)
+                .map(estadistica -> new EstadisticaDTO(
+                        estadistica.getId(),
+                        estadistica.getSeason(),
+                        estadistica.getPj(),
+                        estadistica.getPpp(),
+                        estadistica.getTc(),
+                        estadistica.getTl(),
+                        estadistica.getRpp(),
+                        estadistica.getApp(),
+                        estadistica.getStl(),
+                        estadistica.getBlk(),
+                        estadistica.getPm3(),
+                        estadistica.getPerc3()
+                ));
     }
 
     @GetMapping("stats")
-    public List<Estadistica> getAllEstadistica(){return esi.getAll();}
+    public List<EstadisticaDTO> getAllEstadistica()
+    {
+        return esi.getAll()
+                .stream()
+                .map(estadistica -> new EstadisticaDTO(
+                        estadistica.getId(),
+                        estadistica.getSeason(),
+                        estadistica.getPj(),
+                        estadistica.getPpp(),
+                        estadistica.getTc(),
+                        estadistica.getTl(),
+                        estadistica.getRpp(),
+                        estadistica.getApp(),
+                        estadistica.getStl(),
+                        estadistica.getBlk(),
+                        estadistica.getPm3(),
+                        estadistica.getPerc3()
+                )).toList();
+    }
 }

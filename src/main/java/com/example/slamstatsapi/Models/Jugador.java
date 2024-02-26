@@ -49,7 +49,6 @@ public class Jugador
     private String fotoCompleta;
 
     @OneToMany(mappedBy = "jugador", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Estadistica> estadisticas;
 
     @ManyToMany
@@ -57,6 +56,5 @@ public class Jugador
             name = "jugadorequipo",
             joinColumns = @JoinColumn(name = "jugadorid"),
             inverseJoinColumns = @JoinColumn(name = "equipoid"))
-    @JsonIgnore
     private List<Equipo> equipos;
 }

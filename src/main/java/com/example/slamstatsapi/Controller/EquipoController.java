@@ -4,6 +4,8 @@ import com.example.slamstatsapi.Exceptions.IdNotFoundException;
 import com.example.slamstatsapi.Implementation.EquipoServiceImplementation;
 import com.example.slamstatsapi.Models.Equipo;
 import com.example.slamstatsapi.Models.NumeroRetirado;
+import com.example.slamstatsapi.Models.dto.EquipoDTO;
+import com.example.slamstatsapi.Models.dto.NumeroRetiradoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,20 +20,61 @@ public class EquipoController
     EquipoServiceImplementation esi;
 
     @GetMapping("teams")
-    public List<Equipo> getAllTeams(){return esi.getAllTeams();}
+    public List<EquipoDTO> getAllTeams()
+    {
+        return esi.getAllTeams()
+                .stream()
+                .map(equipo -> new EquipoDTO(
+                        equipo.getId(),
+                        equipo.getNombreEquipo(),
+                        equipo.getAbreviatura(),
+                        equipo.getDescripcion(),
+                        equipo.getFechaFundacion(),
+                        equipo.getTitulos(),
+                        equipo.getNumeroRetirados()
+                )).toList();
+    }
 
     @GetMapping("team/{id}")
-    public Optional<Equipo> getTeamById(@PathVariable Long id) throws IdNotFoundException
+    public Optional<EquipoDTO> getTeamById(@PathVariable Long id) throws IdNotFoundException
     {
-        return esi.getTeamById(id);
+        return esi.getTeamById(id)
+                .map(equipo -> new EquipoDTO(
+                        equipo.getId(),
+                        equipo.getNombreEquipo(),
+                        equipo.getAbreviatura(),
+                        equipo.getDescripcion(),
+                        equipo.getFechaFundacion(),
+                        equipo.getTitulos(),
+                        equipo.getNumeroRetirados()
+                ));
     }
 
     @GetMapping("team")
-    public List<Equipo> getTeamsByName(@RequestParam String nombre){return esi.getTeamByName(nombre);}
+    public List<EquipoDTO> getTeamsByName(@RequestParam String nombre)
+    {
+        return esi.getTeamByName(nombre)
+                .stream()
+                .map(equipo -> new EquipoDTO(
+                        equipo.getId(),
+                        equipo.getNombreEquipo(),
+                        equipo.getAbreviatura(),
+                        equipo.getDescripcion(),
+                        equipo.getFechaFundacion(),
+                        equipo.getTitulos(),
+                        equipo.getNumeroRetirados()
+                )).toList();
+    }
 
     @GetMapping("team/{id}/retiredNumbers")
-    public List<NumeroRetirado> getRetiredNumbers(@PathVariable Long id) throws IdNotFoundException
+    public List<NumeroRetiradoDTO> getRetiredNumbers(@PathVariable Long id) throws IdNotFoundException
     {
-        return esi.getRetiredNumbersByTeamId(id);
+        return esi.getRetiredNumbersByTeamId(id)
+                .stream()
+                .map(numeroRetirado -> new NumeroRetiradoDTO(
+                        numeroRetirado.getId(),
+                        numeroRetirado.getNumero(),
+                        numeroRetirado.getNumero()
+                )).toList();
     }
 }

@@ -27,7 +27,7 @@ public class PremiosServiceImplementation implements PremiosService
     }
 
     @Override
-    public Premios getPremiosById(Long id) throws IdNotFoundException
+    public Optional<Premios> getPremiosById(Long id) throws IdNotFoundException
     {
         Optional<Premios> premios = pr.findById(id);
 
@@ -36,11 +36,11 @@ public class PremiosServiceImplementation implements PremiosService
             throw new IdNotFoundException("There is no Tropies for that ID.");
         }
 
-        return premios.get();
+        return premios;
     }
 
     @Override
-    public Premios getPremiosByPlayerId(Long id) throws IdNotFoundException
+    public Optional<Premios> getPremiosByPlayerId(Long id) throws IdNotFoundException
     {
         Optional<Jugador> j = jr.findById(id);
 

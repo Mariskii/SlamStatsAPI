@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface PremiosService
 {
     List<Premios> getAllPremios();
-    Premios getPremiosById(Long id) throws IdNotFoundException;
-    Premios getPremiosByPlayerId(Long id) throws IdNotFoundException;
+    Optional<Premios> getPremiosById(Long id) throws IdNotFoundException;
+    Optional<Premios> getPremiosByPlayerId(Long id) throws IdNotFoundException;
 }

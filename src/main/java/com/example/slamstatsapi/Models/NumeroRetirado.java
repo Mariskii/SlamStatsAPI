@@ -26,6 +26,5 @@ public class NumeroRetirado
 
     @ManyToOne
     @JoinColumn(name = "equipoid")
-    @JsonIgnore
     private Equipo equipo;
 }

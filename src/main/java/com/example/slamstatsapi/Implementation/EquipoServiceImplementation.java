@@ -25,7 +25,9 @@ public class EquipoServiceImplementation implements EquipoService
     @Override
     public Optional<Equipo> getTeamById(Long id) throws IdNotFoundException
     {
-        if(er.findById(id).isEmpty())
+        Optional<Equipo> equipo = er.findById(id);
+
+        if(equipo.isEmpty())
         {
             throw new IdNotFoundException("There is no team with that id");
         }
@@ -41,13 +43,9 @@ public class EquipoServiceImplementation implements EquipoService
     @Override
     public List<NumeroRetirado> getRetiredNumbersByTeamId(Long id) throws IdNotFoundException
     {
-        Optional<Equipo> equipo = er.findById(id);
+        Equipo equipo = er.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("There is no team with that id"));
 
-        if(equipo.isEmpty())
-        {
-            throw new IdNotFoundException("There is no team with that id");
-        }
-
-        return equipo.get().getNumeroRetirados();
+        return equipo.getNumeroRetirados();
     }
 }

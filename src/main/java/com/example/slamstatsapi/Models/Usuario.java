@@ -22,16 +22,12 @@ public class Usuario
     private Long id;
 
     @Column(name = "nombreusuario")
-    @NotBlank
     private String nombreUsuario;
 
     @Column(name = "correo")
-    @NotBlank
-    @Email
     private String correo;
 
     @Column(name = "passwd")
-    @NotBlank
     private String passwd;
 
     @ManyToMany
@@ -39,6 +35,5 @@ public class Usuario
             name = "jugadoresfavoritos",
             joinColumns = @JoinColumn(name = "usuarioid"),
             inverseJoinColumns = @JoinColumn(name = "jugadorid"))
-    @JsonIgnore
     List<Jugador> jugadoresFavoritos;
 }
