@@ -14,7 +14,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET all the players
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/players/all?page=0
+  https://test-production-6b7f.up.railway.app/slamstats/players/all?page=0
 ```
 
 | Parameter | Required     | Description                |
@@ -57,7 +57,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET Player by ID
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/players/{id}
+  https://test-production-6b7f.up.railway.app/slamstats/players/{id}
 ```
 
 | Parameter | Required     | Description                       |
@@ -85,7 +85,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET Player Teams By Player ID
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/players/{id}/teams
+  https://test-production-6b7f.up.railway.app/slamstats/players/{id}/teams
 ```
 
 | Parameter | Required     | Description                       |
@@ -112,7 +112,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET Player Players by name
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/players?nombre=Kawhi&page=0
+  https://test-production-6b7f.up.railway.app/slamstats/players?nombre=Kawhi&page=0
 ```
 
 | Parameter | Required     | Description                       |
@@ -144,7 +144,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET all the teams
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/teams
+  https://test-production-6b7f.up.railway.app/slamstats/teams
 ```
 ##### It will return the 30 teams of the NBA:
 ```
@@ -191,7 +191,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET Team By ID
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/team/{id}
+  https://test-production-6b7f.up.railway.app/slamstats/team/{id}
 ``` 
 
 | Parameter | Required     | Description                       |
@@ -242,7 +242,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET Teams By Name
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/team?nombre=San Antonio
+  https://test-production-6b7f.up.railway.app/slamstats/team?nombre=San Antonio
 ``` 
 
 | Parameter | Required     | Description                       |
@@ -319,7 +319,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET Teams Retired Jerseys
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/team/{id}/retiredNumbers
+  https://test-production-6b7f.up.railway.app/slamstats/team/{id}/retiredNumbers
 ``` 
 
 | Parameter | Required     | Description                       |
@@ -361,7 +361,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET all the trophies
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/trophies
+  https://test-production-6b7f.up.railway.app/slamstats/trophies
   ``` 
 ##### The Json will look like that:
   ```
@@ -383,7 +383,7 @@ You can check out the following documentation to try the API by yourself.
   #### GET trophies by ID
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/trophies/{id}
+  https://test-production-6b7f.up.railway.app/slamstats/trophies/{id}
   ``` 
   | Parameter | Required     | Description                       |
 | :-------- | :------- | :-------------------------------- |
@@ -406,7 +406,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET trophies by Player ID
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/trophies/players/{id}
+  https://test-production-6b7f.up.railway.app/slamstats/trophies/players/{id}
   ``` 
   | Parameter | Required     | Description                       |
 | :-------- | :------- | :-------------------------------- |
@@ -431,7 +431,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET all the stats (Pending modification)
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/stats
+  https://test-production-6b7f.up.railway.app/slamstats/stats
   ``` 
 
 ##### The Json will look like that:
@@ -460,7 +460,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET stats by ID
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/stats/{id}
+  https://test-production-6b7f.up.railway.app/slamstats/stats/{id}
   ``` 
 
 ##### The Json will look like that:
@@ -485,7 +485,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET stats by Player ID
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/stats/player/{id}
+  https://test-production-6b7f.up.railway.app/slamstats/stats/player/{id}
   ``` 
 
 | Parameter | Required     | Description                   |
@@ -520,7 +520,7 @@ You can check out the following documentation to try the API by yourself.
 #### POST new user
 
 ```http
-  POST https://test-production-6b7f.up.railway.app/slamstats/user/register
+  https://test-production-6b7f.up.railway.app/slamstats/user/register
   ``` 
 
 ##### Request Body:
@@ -535,7 +535,7 @@ You can check out the following documentation to try the API by yourself.
 #### DELETE new favorite player
 
 ```http
-  DELETE https://test-production-6b7f.up.railway.app/slamstats/user/addFavorite?idPlayer=2&idUser=1
+  https://test-production-6b7f.up.railway.app/slamstats/user/addFavorite?idPlayer=2&idUser=1
   ``` 
 | Parameter | Required     | Description                   |
 | :-------- | :------- | :-------------------------------- |
@@ -545,7 +545,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET All the favorite players of the user
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/user/{id}/favoritePlayers
+  https://test-production-6b7f.up.railway.app/slamstats/user/{id}/favoritePlayers
   ``` 
 | Parameter | Required     | Description                   |
 | :-------- | :------- | :-------------------------------- |
@@ -584,7 +584,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET Login 
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/useruser/login?userName=1&passwd=1
+  https://test-production-6b7f.up.railway.app/slamstats/useruser/login?userName=1&passwd=1
   ``` 
 | Parameter | Required     | Description                   |
 | :-------- | :------- | :-------------------------------- |
@@ -603,7 +603,7 @@ You can check out the following documentation to try the API by yourself.
 #### GET If a player is favorite 
 
 ```http
-  GET https://test-production-6b7f.up.railway.app/slamstats/user/{idUser}/favoritePlayers/{idPlayer}
+  https://test-production-6b7f.up.railway.app/slamstats/user/{idUser}/favoritePlayers/{idPlayer}
   ``` 
 | Parameter | Required     | Description                   |
 | :-------- | :------- | :-------------------------------- |
