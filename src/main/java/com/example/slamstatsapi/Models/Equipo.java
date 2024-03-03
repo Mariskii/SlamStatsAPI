@@ -35,6 +35,9 @@ public class Equipo
     @Column(name = "titulos")
     private int titulos;
 
+    @Column(name = "imagenequipo")
+    private String imagenEquipo;
+
     @OneToMany(mappedBy = "equipo")
     List<NumeroRetirado> numeroRetirados;
 }

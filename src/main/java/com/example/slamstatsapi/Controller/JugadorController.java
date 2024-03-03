@@ -96,7 +96,8 @@ public class JugadorController
                 .map(equipo -> new EquipoJugadorDTO(
                         equipo.getId(),
                         equipo.getNombreEquipo(),
-                        equipo.getAbreviatura()
+                        equipo.getAbreviatura(),
+                        equipo.getImagenEquipo()
                 )).toList();
     }
 }

@@ -14,4 +14,6 @@ public class EquipoJugadorDTO
     private String nombreEquipo;
 
     private String abreviatura;
+
+    private String imagenEquipo;
 }

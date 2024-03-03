@@ -27,5 +27,7 @@ public class EquipoDTO
 
     private int titulos;
 
+    private String imagenequipo;
+
     private List<NumeroRetiradoDTO> numeroRetirados;
 }

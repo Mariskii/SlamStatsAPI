@@ -31,6 +31,7 @@ public class EquipoController
                         equipo.getDescripcion(),
                         equipo.getFechaFundacion(),
                         equipo.getTitulos(),
+                        equipo.getImagenEquipo(),
                         equipo.getNumeroRetirados()
                                 .stream().map(numeroRetirado -> new NumeroRetiradoDTO(
                                         numeroRetirado.getId(),
@@ -51,6 +52,7 @@ public class EquipoController
                         equipo.getDescripcion(),
                         equipo.getFechaFundacion(),
                         equipo.getTitulos(),
+                        equipo.getImagenEquipo(),
                         equipo.getNumeroRetirados()
                                 .stream().map(numeroRetirado -> new NumeroRetiradoDTO(
                                         numeroRetirado.getId(),
@@ -72,6 +74,7 @@ public class EquipoController
                         equipo.getDescripcion(),
                         equipo.getFechaFundacion(),
                         equipo.getTitulos(),
+                        equipo.getImagenEquipo(),
                         equipo.getNumeroRetirados()
                                 .stream().map(numeroRetirado -> new NumeroRetiradoDTO(
                                         numeroRetirado.getId(),
