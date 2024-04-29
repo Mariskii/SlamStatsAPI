@@ -42,7 +42,7 @@ public class JugadorServiceImplementation implements JugadorService
 
     @Override
     public List<Jugador> getJugadorByNombreCompleto(String n, Pageable pageable) {
-        return jr.findByNombreCompletoContaining(n,pageable);
+        return jr.findByNombreCompletoContaining(n.toLowerCase(),pageable);
     }
 
     @Override

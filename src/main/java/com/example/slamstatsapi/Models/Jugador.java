@@ -17,7 +17,7 @@ import java.util.List;
 public class Jugador
 {
     @Id
-    @Column(name = "id_player")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
