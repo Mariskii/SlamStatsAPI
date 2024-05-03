@@ -5,11 +5,14 @@ import com.example.slamstatsapi.Exceptions.PasswordMismatchException;
 import com.example.slamstatsapi.Exceptions.UserExistsException;
 import com.example.slamstatsapi.Exceptions.UserNotFoundException;
 import com.example.slamstatsapi.Models.Jugador;
+import com.example.slamstatsapi.Models.dto.Responses.GlobalResponse;
 import com.example.slamstatsapi.Models.Usuario;
 import com.example.slamstatsapi.Repository.JugadorRepository;
 import com.example.slamstatsapi.Repository.UsuarioRepository;
 import com.example.slamstatsapi.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +31,11 @@ public class UsuarioServiceImplementation implements UsuarioService
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
-    public void registerUser(Usuario usuario) throws UserExistsException
+    public ResponseEntity<GlobalResponse> registerUser(Usuario usuario) throws UserExistsException
     {
         if(ur.existsUsuarioByNombreUsuario(usuario.getNombreUsuario()))
         {
-            throw new UserExistsException("This user already exists");
+            throw new UserExistsException("Ya existe un usuario con ese nombre");
         }
         else
         {
@@ -40,11 +43,14 @@ public class UsuarioServiceImplementation implements UsuarioService
             usuario.setPasswd(passwordEncoder.encode(usuario.getPasswd()));
 
             ur.save(usuario);
+
         }
+
+        return ResponseEntity.status (HttpStatus.CREATED).body(new GlobalResponse(HttpStatus.CREATED,"Usuario creado"));
     }
 
     @Override
-    public void addFavoritePlayer(Long idPlayer, Long idUser) throws UserNotFoundException, IdNotFoundException
+    public ResponseEntity<GlobalResponse> addFavoritePlayer(Long idPlayer, Long idUser) throws UserNotFoundException, IdNotFoundException
     {
         Jugador j = jr.findById(idPlayer)
                 .orElseThrow(() -> new IdNotFoundException("There is no player with that id."));
@@ -54,11 +60,13 @@ public class UsuarioServiceImplementation implements UsuarioService
 
         u.getJugadoresFavoritos().add(j);
         ur.save(u);
+
+        return ResponseEntity.status (HttpStatus.CREATED).body(new GlobalResponse(HttpStatus.CREATED,"Añadido a Favoritos"));
     }
 
 
     @Override
-    public void deleteFavoritePlayer(Long idPlayer, Long idUser) throws UserNotFoundException, IdNotFoundException
+    public ResponseEntity<GlobalResponse> deleteFavoritePlayer(Long idPlayer, Long idUser) throws UserNotFoundException, IdNotFoundException
     {
         Jugador j = jr.findById(idPlayer)
                 .orElseThrow(() -> new IdNotFoundException(""));
@@ -71,6 +79,8 @@ public class UsuarioServiceImplementation implements UsuarioService
 
         u.setJugadoresFavoritos(jugadors);
         ur.save(u);
+
+        return ResponseEntity.status (HttpStatus.OK).body(new GlobalResponse(HttpStatus.CREATED,"Borrado a Favoritos"));
     }
 
     @Override

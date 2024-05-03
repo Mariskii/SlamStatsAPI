@@ -7,6 +7,7 @@ import com.example.slamstatsapi.Exceptions.UserNotFoundException;
 import com.example.slamstatsapi.Implementation.UsuarioServiceImplementation;
 import com.example.slamstatsapi.Models.Usuario;
 import com.example.slamstatsapi.Models.dto.JugadorDTO;
+import com.example.slamstatsapi.Models.dto.Responses.GlobalResponse;
 import com.example.slamstatsapi.Models.dto.UsuarioLoginDTO;
 import com.example.slamstatsapi.Models.dto.UsuarioRegisterDTO;
 import jakarta.validation.Valid;
@@ -27,7 +28,7 @@ public class UsuarioController
 
     @PostMapping("user/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerUser(@Valid @RequestBody UsuarioRegisterDTO usuario) throws UserExistsException
+    public ResponseEntity<GlobalResponse> registerUser(@Valid @RequestBody UsuarioRegisterDTO usuario) throws UserExistsException
     {
         Usuario user = new Usuario();
 
@@ -35,20 +36,20 @@ public class UsuarioController
         user.setCorreo(usuario.getCorreo());
         user.setPasswd(usuario.getPasswd());
 
-        usi.registerUser(user);
+        return usi.registerUser(user);
     }
 
     @PostMapping(value = "user/addFavorite", params = {"idPlayer","idUser"})
     @ResponseStatus(HttpStatus.CREATED)
-    public void addFavoritePlayer(@RequestParam Long idPlayer, @RequestParam Long idUser) throws UserNotFoundException, IdNotFoundException {
-        usi.addFavoritePlayer(idPlayer,idUser);
+    public ResponseEntity<GlobalResponse> addFavoritePlayer(@RequestParam Long idPlayer, @RequestParam Long idUser) throws UserNotFoundException, IdNotFoundException {
+        return usi.addFavoritePlayer(idPlayer,idUser);
     }
 
     @DeleteMapping(value = "user/deleteFavorite", params = {"idPlayer","idUser"})
     @ResponseStatus(HttpStatus.OK)
-    public void deleteFavoritePlayer(@RequestParam Long idPlayer, @RequestParam Long idUser)throws UserNotFoundException, IdNotFoundException
+    public ResponseEntity<GlobalResponse> deleteFavoritePlayer(@RequestParam Long idPlayer, @RequestParam Long idUser)throws UserNotFoundException, IdNotFoundException
     {
-        usi.deleteFavoritePlayer(idPlayer,idUser);
+        return usi.deleteFavoritePlayer(idPlayer,idUser);
     }
 
     @GetMapping("user/{id}/favoritePlayers")
