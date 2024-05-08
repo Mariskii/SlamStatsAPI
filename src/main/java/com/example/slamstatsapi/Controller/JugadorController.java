@@ -100,4 +100,23 @@ public class JugadorController
                         equipo.getImagenEquipo()
                 )).toList();
     }
+
+    @GetMapping("players/random")
+    public List<JugadorDTO> getRandomPlayers(@RequestParam Long quantity) throws IdNotFoundException
+    {
+        return jsi.getRandomJugadores(quantity)
+                .stream()
+                .map(jugador -> new JugadorDTO(
+                        jugador.getId(),
+                        jugador.getNombreCompleto(),
+                        jugador.getNacionalidad(),
+                        jugador.getFNacimiento(),
+                        jugador.getAltura(),
+                        jugador.getPeso(),
+                        jugador.getPosicion(),
+                        jugador.getDorsal(),
+                        jugador.getFotoCabeza(),
+                        jugador.getFotoCompleta()
+                )).toList();
+    }
 }
